@@ -1,0 +1,93 @@
+.body{
+    width: 100vw;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+}
+.row{
+    display: flex;
+}
+.block{
+    border: 1px solid black;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+}
+.white{
+    width: 60px;
+    height: 60px;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 50%;
+    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.566);
+}
+.black{
+    width: 60px;
+    height: 60px;
+    background-color: black;
+    border: 2px solid black;
+    border-radius: 50%;
+    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.566);
+}
+.UI{
+    display: flex;
+    width: 640px;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.turnBox{
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    width: 100px;
+    justify-content: space-between;
+    border-radius: 8px;
+}
+.whiteCircle{
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 50%;
+    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.566);
+    margin: 5px;
+}
+.blackCircle{
+    width: 30px;
+    height: 30px;
+    background-color: black;
+    border: 2px solid black;
+    border-radius: 50%;
+    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.566);
+    margin: 5px;
+}
+.highlight{
+    animation: infinite light 3s;
+}
+@keyframes light {
+    0%{
+        background-color: rgba(43, 43, 43, 0.34);
+    }
+    25%{
+        background-color: rgba(63, 63, 63, 0.34);
+    }
+    50%{
+        background-color: rgba(15, 15, 15, 0.34);
+    }
+    75%{
+        background-color: rgba(77, 77, 77, 0.34);
+    }
+    100%{
+        background-color: rgba(26, 26, 26, 0.34);
+    }
+}

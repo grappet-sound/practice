@@ -1,4 +1,4 @@
-import '../App.css';
+import '../style/RandomGame.css';
 import { useState } from 'react';
 
 function RandomGame() {
@@ -12,15 +12,18 @@ function RandomGame() {
     setNumber3(Math.floor(Math.random() * 10));
   }
   return (
-    <div class="box">
-      <h1>RANDOM</h1>
-      <div class="numbers">
-        <h2>{number1}</h2>
-        <h2>{number2}</h2>
-        <h2>{number3}</h2>
-      </div>
-      <button onClick={handleClick}>Click</button>
+    <div className="cover">
+        <div class="box">
+        <h1>RANDOM</h1>
+        <div class="numbers">
+            <h2>{number1}</h2>
+            <h2>{number2}</h2>
+            <h2>{number3}</h2>
+        </div>
+        <button onClick={handleClick}>Click</button>
+        </div>
     </div>
+    
   );
 }
 

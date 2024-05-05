@@ -28,6 +28,11 @@ function Main() {
                             TicTacToe Game
                         </button>
                     </Link>
+                    <Link to='/othello'>
+                        <button>
+                            Othello Game
+                        </button>
+                    </Link>
                 </div>
                 
             </div>
