@@ -3,7 +3,7 @@ import "../style/Main.css";
 import { HashLink } from "react-router-hash-link";
 function Main() {
     return(
-        <div className="body">
+        <div className="bodyMain">
             <div className="topbar">
                 <HashLink smooth to='/#main'>
                     <div>Main</div>
@@ -31,6 +31,11 @@ function Main() {
                     <Link to='/othello'>
                         <button>
                             Othello Game
+                        </button>
+                    </Link>
+                    <Link to='/picross'>
+                        <button>
+                            Picross Game
                         </button>
                     </Link>
                 </div>
