@@ -1,4 +1,4 @@
-function PicrossCell(cellType){
+function PicrossCell({cellType}){
     function getClassName(){
         if(cellType == "colored") {
             return "cell colored";
@@ -9,7 +9,12 @@ function PicrossCell(cellType){
         if(cellType == "marked") {
             return "cell marked";
         }
+        if(cellType == "drag") {
+            return "cell drag";
+        }
+        return "cell";
     }
-    return <div className="cell"></div>;
+    console.log(cellType);
+    return <div className={getClassName()}></div>;
 }
 export default PicrossCell;
