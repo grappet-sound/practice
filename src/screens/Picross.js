@@ -111,24 +111,63 @@ function Picross(){
         setDSP({
             isDragging: true,
             row: rowIdx,
-            col: colIdx
+            col: colIdx,
+            isRightClick: false
         });
+    }
+
+    function rightClickDragStart(rowIdx, colIdx){
+        setDSP({
+            isDragging: true,
+            row: rowIdx,
+            col: colIdx,
+            isRightClick: true,
+            isErasing: userMap[rowIdx][colIdx] == 2
+        });
+    }
+
+    
+    function fillCell(rowIdx, colIdx, fillNumber){
+        if(userMap[rowIdx][colIdx] == 2 && fillNumber == 0){
+            return 0;
+        }
+        if(userMap[rowIdx][colIdx] != 0){
+            return userMap[rowIdx][colIdx];
+        }
+        if(fillNumber == 1){
+            if(map[rowIdx][colIdx] == 1){
+                return 1;
+            }else{
+                return 3;
+            }
+        }
+        return fillNumber;
     }
 
     function dragEnd(){
         if(dragStartPoint.isDragging){
             var newUserMap = userMap.map(row => [...row]);
+            var fillNumber = 1;
+            
+            if(dragStartPoint.isRightClick){
+                if(dragStartPoint.isErasing){
+                    fillNumber = 0;
+                }else{
+                    fillNumber = 2;
+                }
+            }
+
             if(dragStartPoint.row == currPoint.row){
                 for(var colIdx = 0; colIdx < userMap[0].length; colIdx++){
                     if((dragStartPoint.col <= colIdx && colIdx <= currPoint.col) || (currPoint.col <= colIdx && colIdx <= dragStartPoint.col)){
-                        newUserMap[dragStartPoint.row][colIdx] = 1;
+                        newUserMap[dragStartPoint.row][colIdx] = fillCell(dragStartPoint.row, colIdx, fillNumber);
                     }
                 }
             }
             if(dragStartPoint.col == currPoint.col){
-                for(var rowIdx; rowIdx < userMap.length; rowIdx++){
+                for(var rowIdx = 0; rowIdx < userMap.length; rowIdx++){
                     if((dragStartPoint.row <= rowIdx && rowIdx <= currPoint.row) || (currPoint.row <= rowIdx && rowIdx <= dragStartPoint.row)){
-                        newUserMap[rowIdx][dragStartPoint.col] = 1;
+                        newUserMap[rowIdx][dragStartPoint.col] = fillCell(rowIdx, dragStartPoint.col, fillNumber);
                     }
                 }
             }
@@ -159,9 +198,19 @@ function Picross(){
                         </div>
                         {userMap[rowIdx].map((state, colIdx) => {
                             return (
-                                <div 
-                                    onMouseDown={()=>{dragStart(rowIdx, colIdx)}}
+                                <div
+                                    className="wrap" 
+                                    onMouseDown={(e)=>{
+                                        if((e.button == 0) || (e.which && e.which == 1)){
+                                            dragStart(rowIdx, colIdx);
+                                        }else if((e.button && e.button == 2) || (e.which && e.which == 3)){
+                                            rightClickDragStart(rowIdx, colIdx);
+                                        }
+                                    }}
                                     onMouseEnter={() => {setCP({row: rowIdx, col: colIdx})}}
+                                    onContextMenu={(e) => {
+                                        e.preventDefault();
+                                    }}
                                 >
                                     <PicrossCell cellType={getCellType(state, rowIdx, colIdx)}></PicrossCell>
                                 </div>
