@@ -1,17 +1,29 @@
 import  PicrossCell from "../component/PicrossCell";
 import "../style/Picross.css";
 import {useEffect, useState} from "react";
-import MAP_HEART from "../script/PicrossMap";
+import { MAP_HEART } from "../script/PicrossMap";
 function Picross(){
     const [hint, setHint] = useState({row: [], col: []});
     const [map, setMap] = useState([]);
     const [userMap, setUserMap] = useState([]);
     const [dragStartPoint, setDSP] = useState({isDragging: false});
     const [currPoint, setCP] = useState({row: -1, col: -1});
+    const [cellSize, setCellSize] = useState(5);
     function mapSetting(){
         setMap(MAP_HEART);
     }
     useEffect(mapSetting, []);
+
+    useEffect(() => {
+        if(map.length == 0){
+            return;
+        }
+        if(map.length > map[0].lemgth){
+            setCellSize(map.length);
+        }else{
+            setCellSize(map[0].length);
+        }
+    }, [map]);
 
     function userMapSetting(){
         if(map.length == 0) return;
@@ -212,7 +224,10 @@ function Picross(){
                                         e.preventDefault();
                                     }}
                                 >
-                                    <PicrossCell cellType={getCellType(state, rowIdx, colIdx)}></PicrossCell>
+                                    <PicrossCell
+                                        cellType={getCellType(state, rowIdx, colIdx, )}
+                                        cellSize={cellSize}
+                                    ></PicrossCell>
                                 </div>
                             )
                         })}
